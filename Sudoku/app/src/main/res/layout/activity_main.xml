@@ -10,8 +10,70 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.oliwia.sudoku.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:text="Poziom trudny"
+        android:layout_width="300px"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_above="@+id/btnInstruction"
+        android:layout_alignRight="@+id/btnInstruction"
+        android:layout_alignEnd="@+id/btnInstruction"
+        android:layout_marginBottom="21dp"
+        android:id="@+id/btnHard" />
+
+    <Button
+        android:text="Przywróć grę"
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:id="@+id/btnRestore"
+        android:layout_above="@+id/btnCreate"
+        android:layout_alignLeft="@+id/btnCreate"
+        android:layout_alignStart="@+id/btnCreate" />
+
+    <Button
+        android:text="Poziom średni"
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/btnMedium"
+        android:layout_above="@+id/btnHard"
+        android:layout_alignLeft="@+id/btnHard"
+        android:layout_alignStart="@+id/btnHard" />
+
+    <Button
+        android:text="Poziom łatwy"
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnEasy"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/btnMedium"
+        android:layout_alignLeft="@+id/btnMedium"
+        android:layout_alignStart="@+id/btnMedium" />
+
+    <Button
+        android:text="Utwórz plansze"
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:id="@+id/btnCreate"
+        android:layout_above="@+id/btnEasy"
+        android:layout_alignLeft="@+id/btnEasy"
+        android:layout_alignStart="@+id/btnEasy" />
+
+    <Button
+        android:text="Instrukcja"
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnInstruction"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="64dp" />
+
+    <Button
+        android:text="Wyniki"
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnScore" />
 </RelativeLayout>

@@ -51,7 +51,7 @@
         android:layout_alignStart="@+id/btnMedium" />
 
     <Button
-        android:text="Utwórz plansze"
+        android:text="Utwórz planszę"
         android:layout_width="300px"
         android:layout_height="wrap_content"
         android:layout_marginBottom="18dp"

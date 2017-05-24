@@ -18,13 +18,13 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
 
     public static final String DBName="Sudoku.db";
     public static final String TableRecords="Records";
-    public static final String Col_0R="RecordId";
+    public static final String Col_0R="_id";
     public static final String Col_1R="UserName";
     public static final String Col_2R="Time";
     public static final String Col_3R="Level";
 
     public static final String TableBoards="Boards";
-    public static final String Col_0B="BoardId";
+    public static final String Col_0B="_id";
     public static final String Col_1B="Date";
     public static final String Col_2B="Board";
 
@@ -44,12 +44,12 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TableRecords + " ( " + Col_0R + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 Col_1R + " text, " +
                 Col_2R + " text, " +
-                Col_3R + " text");
+                Col_3R + " text" + ")");
         Log.d(LOGCAT,"Create table Records");
 
         db.execSQL("CREATE TABLE " + TableBoards + " ( " + Col_0B + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 Col_1B + " text, " +
-                Col_2B + " text");
+                Col_2B + " text" + ")");
         Log.d(LOGCAT,"Create table Boards");
     }
 
@@ -86,10 +86,10 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getRecords(){
-        String[] kolumny = {Col_0R,Col_1R,Col_2R,Col_3R};
+        String[] column = {Col_0R,Col_1R,Col_2R,Col_3R};
         SQLiteDatabase db = getReadableDatabase();
-        Cursor kursor = db.query(TableRecords, kolumny, null, null, null, null, null);
-        return kursor;
+        Cursor cursor = db.query(TableRecords, column, null, null, null, null, null);
+        return cursor;
     }
 
     public void removeRecords()

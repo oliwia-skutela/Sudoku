@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <TableRow>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:text="Użytkownik"
+                android:id="@+id/tv_user"
+                android:textColor="#ffffff" />
+            <TextView
+                android:layout_weight=".70"
+
+                android:id="@+id/item_user"
+                android:textColor="#ffffff" /></TableRow>
+
+        <TableRow><TextView
+            android:id="@+id/tv_time"
+            android:text="Czas"
+            android:textColor="#ffffff" />
+            <TextView
+                android:id="@+id/item_time"
+                android:textColor="#ffffff" /></TableRow>
+        <TableRow><TextView
+            android:id="@+id/tv_level"
+            android:text="Poziom"
+            android:textColor="#ffffff" />
+            <TextView
+                android:id="@+id/item_level"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+
+
+        <TableRow>
+
+        </TableRow>
+
+
+
+
+    </TableLayout>

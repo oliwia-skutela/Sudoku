@@ -46,6 +46,8 @@ public class MainActivity extends Activity {
 
         btnEasy.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Intent cell = new Intent(getApplicationContext(), Easy.class);
+                startActivity(cell);//przejscie do poziomu łatwy
                 // Perform action on click
             }
         });

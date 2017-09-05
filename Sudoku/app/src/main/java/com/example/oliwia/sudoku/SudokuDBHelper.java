@@ -32,7 +32,6 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
 
 
 
-
     public SudokuDBHelper(Context context) {
 
         super(context, DBName, null, 1);
@@ -51,8 +50,8 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TableBoards + " ( " + Col_0B + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 Col_1B + " text, " +
-                Col_2B + " text,"+
-                Col_3B + "text"+ ")");
+                Col_2B + " text,"  +
+                Col_3B + " text"+ ")");
         Log.d(LOGCAT,"Create table Boards");
     }
 
@@ -81,18 +80,18 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
     public void addBoard(String date, String board, String originalBoard){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues value = new ContentValues();
-        value.put(Col_1R,date);
-        value.put(Col_2R,board);
+        value.put(Col_1B,date);
+        value.put(Col_2B,board);
         value.put(Col_3B,originalBoard);
-        db.insertOrThrow(TableBoards, null, value);
+        db.insert(TableBoards, null, value);
         db.close();
         Log.d(LOGCAT,"Add to table Boards");
     }
 
     public Cursor getRecords(){
-        String[] column = {Col_0R,Col_1R,Col_2R,Col_3R};
+        String[] columns = {Col_0R,Col_1R,Col_2R,Col_3R};
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TableRecords, column, null, null, null, null, null);
+        Cursor cursor = db.query(TableRecords, columns, null, null, null, null, null);
         return cursor;
     }
 
@@ -106,7 +105,7 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
     public String getLastBoard(int id)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        String[] columns = {Col_2B};
+        String[] columns = {Col_1B,Col_2B};
         String where = Col_0B + "=" + id;
         Cursor cursor = db.query(TableBoards, columns, where, null, null, null, null);
         String board="";

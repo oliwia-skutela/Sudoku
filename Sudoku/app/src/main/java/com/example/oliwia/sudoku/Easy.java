@@ -219,9 +219,9 @@ public class Easy extends AppCompatActivity {
         }else
         {
             Toast.makeText(Easy.this, "Ukonczona", Toast.LENGTH_SHORT).show();
-            /*if(checkIfCorrect(mButtons))
+            if(checkIfCorrect(mButtons))
             {
-                Toast.makeText(Easy.this, "konczone i bez bledow", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Easy.this, "Ukonczone i bez bledow", Toast.LENGTH_SHORT).show();
 
                 time.stop();
 
@@ -233,7 +233,7 @@ public class Easy extends AppCompatActivity {
             }else
             {
                 Toast.makeText(Easy.this, "Plansza zawiera błędy", Toast.LENGTH_SHORT).show();
-            }*/
+            }
 
         }
     }

@@ -5,12 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.DigitsKeyListener;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -21,20 +29,30 @@ public class Easy extends AppCompatActivity {
 
     Button currentButton;
     TableLayout tl;
+    int currentX;
+    int currentY;
+    List<Button> mButtons = new ArrayList();
+    final String [][] checkSudokuTab = new String[9][9];
+    final String [][] properSudokuTab = new String[9][9];
+    Chronometer time;
+    SudokuDBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easy);
+        db= new SudokuDBHelper(this);
         SudokuGenerator t = new SudokuGenerator();
         int [][] Sudoku = t.generateGrid();
 
-        String [][] properSudokuTab = new String[9][9];
+
+
 
         for(int i =0; i<9; i++)
         {
             for(int j =0; j<9; j++)
             {
                 properSudokuTab[i][j]=String.valueOf(Sudoku[i][j]);
+                checkSudokuTab[i][j]=String.valueOf(Sudoku[i][j]);
             }
         }
 
@@ -56,21 +74,27 @@ public class Easy extends AppCompatActivity {
         }
 
         tl=(TableLayout)findViewById(R.id.tableLayoutSudoku);
-        for(int i = 0 ; i <9; i++)
+        for( int i = 0 ; i <9; i++)
         {
             TableRow tr = new TableRow(this);
             tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-            for(int j = 0 ; j <9; j++)
+            for( int j = 0 ; j <9; j++)
             {
                 Button b = new Button(this);
                 b.setText(properSudokuTab[i][j]);
-                b.setLayoutParams(new TableRow.LayoutParams(60, 60));
+                b.setLayoutParams(new TableRow.LayoutParams(110, 110));
+                mButtons.add(b);
+                final int tempI=i;
+                final int tempJ=j;
                 //b.setOnClickListener(this);
                 if(properSudokuTab[i][j] == null || properSudokuTab[i][j].isEmpty() || properSudokuTab[i][j] == " ") {
                     b.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             Button b = (Button) v;
                             currentButton = b;
+                            currentX=tempI;
+                            currentY=tempJ;
+
                         }
                     });
                 }
@@ -86,7 +110,7 @@ public class Easy extends AppCompatActivity {
             public void onClick(View v) {
                 if(currentButton != null) {
                     Button b = (Button) v;
-                    currentButton.setText(b.getText());
+                    Check(b);
                 }
             }
         });
@@ -96,7 +120,7 @@ public class Easy extends AppCompatActivity {
             public void onClick(View v) {
                 if(currentButton != null) {
                     Button b = (Button) v;
-                    currentButton.setText(b.getText());
+                    Check(b);
                 }
             }
         });
@@ -106,7 +130,7 @@ public class Easy extends AppCompatActivity {
             public void onClick(View v) {
                 if(currentButton != null) {
                     Button b = (Button) v;
-                    currentButton.setText(b.getText());
+                    Check(b);
                 }
             }
         });
@@ -116,7 +140,7 @@ public class Easy extends AppCompatActivity {
             public void onClick(View v) {
                 if(currentButton != null) {
                     Button b = (Button) v;
-                    currentButton.setText(b.getText());
+                    Check(b);
                 }
             }
         });
@@ -126,7 +150,7 @@ public class Easy extends AppCompatActivity {
             public void onClick(View v) {
                 if(currentButton != null) {
                     Button b = (Button) v;
-                    currentButton.setText(b.getText());
+                    Check(b);
                 }
             }
         });
@@ -136,7 +160,7 @@ public class Easy extends AppCompatActivity {
             public void onClick(View v) {
                 if(currentButton != null) {
                     Button b = (Button) v;
-                    currentButton.setText(b.getText());
+                    Check(b);
                 }
             }
         });
@@ -145,7 +169,7 @@ public class Easy extends AppCompatActivity {
             public void onClick(View v) {
                 if(currentButton != null) {
                     Button b = (Button) v;
-                    currentButton.setText(b.getText());
+                    Check(b);
                 }
             }
         });
@@ -154,7 +178,7 @@ public class Easy extends AppCompatActivity {
             public void onClick(View v) {
                 if(currentButton != null) {
                     Button b = (Button) v;
-                    currentButton.setText(b.getText());
+                    Check(b);
                 }
             }
         });
@@ -163,13 +187,92 @@ public class Easy extends AppCompatActivity {
             public void onClick(View v) {
                 if(currentButton != null) {
                     Button b = (Button) v;
-                    currentButton.setText(b.getText());
+                    Check(b);
                 }
             }
         });
 
+        time = (Chronometer) findViewById(R.id.chronometer2);
+        time.start();
+
+    }
+
+    protected void Check(Button button)
+    {
+        String tempButton = button.getText().toString();
+        currentButton.setText(tempButton);
+
+        if(tempButton.equals(checkSudokuTab[currentX][currentY]))
+        {
+            currentButton.setBackgroundColor(0x00000000);
+
+        }else
+        {
+            currentButton.setBackgroundColor(0xFFFF0000);
+
+        }
 
 
+        if(checkAllButtons(mButtons)){
+            Toast.makeText(Easy.this, "Jeszcze do rozwiazania", Toast.LENGTH_SHORT).show();
+
+        }else
+        {
+            Toast.makeText(Easy.this, "Ukonczona", Toast.LENGTH_SHORT).show();
+            /*if(checkIfCorrect(mButtons))
+            {
+                Toast.makeText(Easy.this, "konczone i bez bledow", Toast.LENGTH_SHORT).show();
+
+                time.stop();
+
+                String date = getCurrentDate();
+                BoardHelper bh = new BoardHelper();
+                String originalBoard = bh.convertToString(checkSudokuTab);
+                String currentBoard = bh.convertToString(properSudokuTab);
+                db.addBoard(date,currentBoard,originalBoard );
+            }else
+            {
+                Toast.makeText(Easy.this, "Plansza zawiera błędy", Toast.LENGTH_SHORT).show();
+            }*/
+
+        }
+    }
+
+
+
+    boolean checkAllButtons(List<Button> buttons) {
+
+        boolean isEmpty=false;
+        for (Button b:buttons) {
+            if(b.getText().equals(" "))
+            {
+                isEmpty=true;
+                break;
+            }
+
+        }
+        return isEmpty;
+    }
+
+    boolean checkIfCorrect(List<Button> buttons)
+    {
+        boolean isCorrect=true;
+        for(Button b:buttons){
+            if(b.getTextColors().getDefaultColor()==0xFFFF0000)
+            {
+                isCorrect=false;
+                break;
+            }
+
+        }
+        return isCorrect;
+    }
+
+    public String getCurrentDate() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd / MM / yyyy ");
+        String strDate = mdformat.format(calendar.getTime());
+        return strDate;
     }
 
 }

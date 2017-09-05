@@ -27,6 +27,8 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
     public static final String Col_0B="_id";
     public static final String Col_1B="Date";
     public static final String Col_2B="Board";
+    public static final String Col_3B="OriginalBoard";
+
 
 
 
@@ -49,7 +51,8 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TableBoards + " ( " + Col_0B + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 Col_1B + " text, " +
-                Col_2B + " text" + ")");
+                Col_2B + " text,"+
+                Col_3B + "text"+ ")");
         Log.d(LOGCAT,"Create table Boards");
     }
 
@@ -75,11 +78,12 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
         Log.d(LOGCAT,"Add to table Records");
     }
 
-    public void addBoard(String date, String board){
+    public void addBoard(String date, String board, String originalBoard){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put(Col_1R,date);
         value.put(Col_2R,board);
+        value.put(Col_3B,originalBoard);
         db.insertOrThrow(TableBoards, null, value);
         db.close();
         Log.d(LOGCAT,"Add to table Boards");
@@ -111,6 +115,13 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
             board = cursor.getString(2);
         }
         return board;
+    }
+
+    public Cursor getAllBoards(){
+        String[] columns = {Col_0B,Col_1B,Col_2B};
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TableRecords, columns, null, null, null, null, null);
+        return cursor;
     }
 
     public boolean doesDatabaseExist(Context context) {

@@ -8,13 +8,24 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TableRow>
-    <TableLayout
-        android:id="@+id/tableLayoutSudoku"
-        android:layout_width="match_parent"
-        android:layout_height="400dp">
 
-    </TableLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Chronometer
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chronometer2" />
+        </TableRow>
+
+        <TableRow>
+            <TableLayout
+                android:id="@+id/tableLayoutSudoku"
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
+
+            </TableLayout>
 
 
         </TableRow>
@@ -26,20 +37,20 @@
                 android:layout_height="match_parent">
                 <TableRow>
                     <Button
-                    android:id="@+id/jeden"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:text="1" />
+                        android:id="@+id/jeden"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="1" />
                     <Button
                         android:id="@+id/dwa"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:text="2" />
                     <Button
-                    android:id="@+id/trzy"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:text="3" />
+                        android:id="@+id/trzy"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="3" />
                     <Button
                         android:id="@+id/cztery"
                         android:layout_width="60dp"

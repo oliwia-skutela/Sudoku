@@ -1,12 +1,12 @@
 package com.example.oliwia.sudoku;
 
 /**
- * Created by Oliwia on 2017-05-24.
+ * Created by Oliwia on 2017-07-04.
  */
 
 public class BoardHelper {
 
-    public String convertToString(int[][] board) {
+    public String convertToString(String[][] board) {
         String boardString = "";
 
         for (int x = 0; x < 9; x++) {
@@ -24,19 +24,19 @@ public class BoardHelper {
         return boardString;
     }
 
-    public int[][] convertToInt(String boardString) {
+    public String[][] convertToTable(String boardString) {
         String[] rows = boardString.split(";");
         String[] columns;
 
         int sizeRow = rows.length;
         //int sizeCol=columns.length;
 
-        int[][] board = new int[sizeRow][sizeRow];
+        String[][] board = new String[sizeRow][sizeRow];
 
         for (int x = 0; x < 9; x++) {
             columns = rows[x].split(",");
             for (int y = 0; y < 9; y++) {
-                board[x][y] = Integer.parseInt(columns[y]);
+                board[x][y] = columns[y];
             }
 
         }
@@ -44,3 +44,4 @@ public class BoardHelper {
 
     }
 }
+

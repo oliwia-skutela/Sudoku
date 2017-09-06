@@ -51,9 +51,11 @@ public class Easy extends AppCompatActivity {
         SudokuGenerator t = new SudokuGenerator();
         int [][] Sudoku = t.generateGrid();
 
-
-
-
+        Bundle bundle = getIntent().getExtras();
+        int level = 50; // or other values
+        if(bundle != null) {
+            level = bundle.getInt("key");
+        }
         for(int i =0; i<9; i++)
         {
             for(int j =0; j<9; j++)
@@ -65,13 +67,21 @@ public class Easy extends AppCompatActivity {
 
         Random generator = new Random();
 
-        for(int i = 0; i<40; i++)
+        for(int i = 0; i<level; i++)
         {
             try
             {
+
                 int row =  generator.nextInt(9);
                 int column =  generator.nextInt(9);
-                properSudokuTab[row][column] =" ";
+                if(properSudokuTab[row][column]==" ") {
+                i=i-1;
+                }
+                else
+                {
+                    properSudokuTab[row][column] =" ";
+                }
+
             }
             catch(IndexOutOfBoundsException e)
             {

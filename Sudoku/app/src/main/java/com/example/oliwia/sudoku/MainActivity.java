@@ -50,7 +50,11 @@ public class MainActivity extends Activity {
 
         btnEasy.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent cell = new Intent(getApplicationContext(), Easy.class);
+                Bundle b = new Bundle();
+                b.putInt("key", 30); //Your id
+                cell.putExtras(b);
                 startActivity(cell);//przejscie do poziomu łatwy
                 // Perform action on click
             }
@@ -58,13 +62,22 @@ public class MainActivity extends Activity {
 
         btnMedium.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
+
+                Intent cell = new Intent(getApplicationContext(), Easy.class);
+                Bundle b = new Bundle();
+                b.putInt("key", 45); //Your id
+                cell.putExtras(b);
+                startActivity(cell);//przejscie do poziomu łatwy// Perform action on click
             }
         });
 
         btnHard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
+                Intent cell = new Intent(getApplicationContext(), Easy.class);
+                Bundle b = new Bundle();
+                b.putInt("key", 60); //Your id
+                cell.putExtras(b);
+                startActivity(cell);//przejscie do poziomu łatwy// Perform action on click
             }
         });
 

@@ -4,12 +4,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -51,6 +55,11 @@ public class Easy extends AppCompatActivity {
         SudokuGenerator t = new SudokuGenerator();
         int [][] Sudoku = t.generateGrid();
 
+        Bundle bundle = getIntent().getExtras();
+        int level = 50; // or other values
+        if(bundle != null) {
+            level = bundle.getInt("key");
+        }
 
 
         for(int i =0; i<9; i++)
@@ -64,13 +73,20 @@ public class Easy extends AppCompatActivity {
 
         Random generator = new Random();
 
-        for(int i = 0; i<40; i++)
+        for(int i = 0; i<level; i++)
         {
             try
             {
                 int row =  generator.nextInt(9);
                 int column =  generator.nextInt(9);
-                properSudokuTab[row][column] =" ";
+                if(properSudokuTab[row][column]==" ") {
+                    i=i-1;
+                }
+                else
+                {
+                    properSudokuTab[row][column] =" ";
+                }
+
             }
             catch(IndexOutOfBoundsException e)
             {
@@ -78,7 +94,13 @@ public class Easy extends AppCompatActivity {
             }
 
         }
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
 
+        int buttonsize = width/9;
         tl=(TableLayout)findViewById(R.id.tableLayoutSudoku);
         for( int i = 0 ; i <9; i++)
         {
@@ -88,12 +110,29 @@ public class Easy extends AppCompatActivity {
             {
                 Button b = new Button(this);
                 b.setText(properSudokuTab[i][j]);
-                b.setLayoutParams(new TableRow.LayoutParams(110, 110));
-                mButtons.add(b);
+                b.setLayoutParams(new TableRow.LayoutParams(buttonsize, buttonsize));                mButtons.add(b);
                 final int tempI=i;
                 final int tempJ=j;
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setShape(GradientDrawable.RECTANGLE);
+                drawable.setStroke(2, Color.BLACK);
+                if((j<3 && i<3 )||(j>5 && i>5) ||(j>5 && i<3) ||(j<3 && i>5)||(j>2 && j<6 && i>2 && i<6)) {
+
+                    drawable.setColor(Color.rgb(255, 255, 204));
+                }
+                else
+                {
+                    drawable.setColor(Color.rgb(255, 255, 000));
+
+                }
+                b.setBackgroundDrawable(drawable);
                 //b.setOnClickListener(this);
                 if(properSudokuTab[i][j] == null || properSudokuTab[i][j].isEmpty() || properSudokuTab[i][j] == " ") {
+                    // GradientDrawable font = new GradientDrawable();
+                    //font.setColor(Color.rgb(255, 000, 000));
+                    //b.setForeground(font);
+                    b.setTextColor(Color.BLUE);
+                //b.setOnClickListener(this);
                     b.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             Button b = (Button) v;
@@ -103,6 +142,15 @@ public class Easy extends AppCompatActivity {
 
                         }
                     });
+                     /*GradientDrawable border = new GradientDrawable();
+                    border.setStroke(1, Color.MAGENTA);
+                    border.setGradientType(GradientDrawable.RECTANGLE);
+
+                    Drawable[] layers = {border};*/
+                    // b.setBackgroundColor(0xff0000ff);
+
+                    //drawable.setGradientType(GradientDrawable.RECTANGLE);
+
                 }
                 //b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tr.addView(b);

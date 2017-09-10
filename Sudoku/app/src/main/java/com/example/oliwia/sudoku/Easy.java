@@ -116,15 +116,37 @@ public class Easy extends AppCompatActivity {
                 GradientDrawable drawable = new GradientDrawable();
                 drawable.setShape(GradientDrawable.RECTANGLE);
                 drawable.setStroke(2, Color.BLACK);
-                if((j<3 && i<3 )||(j>5 && i>5) ||(j>5 && i<3) ||(j<3 && i>5)||(j>2 && j<6 && i>2 && i<6)) {
+                if(level==30) {
+                    if ((j < 3 && i < 3) || (j > 5 && i > 5) || (j > 5 && i < 3) || (j < 3 && i > 5) || (j > 2 && j < 6 && i > 2 && i < 6)) {
 
-                    drawable.setColor(Color.rgb(255, 255, 204));
-                }
-                else
-                {
-                    drawable.setColor(Color.rgb(255, 255, 000));
+                        drawable.setColor(Color.rgb(255, 255, 204));
+                    } else {
+                        drawable.setColor(Color.rgb(255, 255, 000));
 
+                    }
                 }
+
+                if(level==45) {
+                    if ((j < 3 && i < 3) || (j > 5 && i > 5) || (j > 5 && i < 3) || (j < 3 && i > 5) || (j > 2 && j < 6 && i > 2 && i < 6)) {
+
+                        drawable.setColor(Color.rgb(171, 217, 233));
+                    } else {
+                        drawable.setColor(Color.rgb(44, 123, 182));
+
+                    }
+                }
+
+                if(level==60) {
+                    if ((j < 3 && i < 3) || (j > 5 && i > 5) || (j > 5 && i < 3) || (j < 3 && i > 5) || (j > 2 && j < 6 && i > 2 && i < 6)) {
+
+                        drawable.setColor(Color.rgb(178, 171, 210));
+                    } else {
+                        drawable.setColor(Color.rgb(94, 60, 153));
+
+                    }
+                }
+
+
                 b.setBackgroundDrawable(drawable);
                 //b.setOnClickListener(this);
                 if(properSudokuTab[i][j] == null || properSudokuTab[i][j].isEmpty() || properSudokuTab[i][j] == " ") {
@@ -245,6 +267,22 @@ public class Easy extends AppCompatActivity {
                 }
             }
         });
+        Button delete = (Button)findViewById(R.id.delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(currentButton != null) {
+                    Button b = (Button) v;
+                    Check(b);
+                }
+            }
+        });
+
+        Button check = (Button)findViewById(R.id.check);
+        check.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                CheckSolution(mButtons);
+            }
+        });
 
         time = (Chronometer) findViewById(R.id.chronometer2);
         time.start();
@@ -253,26 +291,57 @@ public class Easy extends AppCompatActivity {
 
     }
 
+    public void CheckSolution (List<Button> ButtonList){
+        int counter=0;
+        for(int i = 0; i<9; i++)
+        {
+            for (int j=0; j<9; j++){
+                if(!checkSudokuTab[i][j].equals(ButtonList.get(counter).getText().toString())&& !ButtonList.get(counter).getText().toString().equals(" "))
+                {
+                    ButtonList.get(counter).setBackgroundColor(0xFFFF0000);
+                }
+
+                counter++;
+            }
+        }
+    }
+
+    public boolean CheckAllFullSudokuTab(List<Button> ButtonList)
+    {
+        int counter=0;
+        for(int i = 0; i<9; i++)
+        {
+            for (int j=0; j<9; j++){
+                if(!checkSudokuTab[i][j].equals(ButtonList.get(counter).getText().toString()))//|| ButtonList.get(counter).getText().toString().equals(" "))
+                {
+                   return false;
+                }
+
+                counter++;
+            }
+        }
+        return true;
+    }
+
     protected void Check(Button button)
     {
         String tempButton = button.getText().toString();
-        currentButton.setText(tempButton);
-
-        if(tempButton.equals(checkSudokuTab[currentX][currentY]))
+        if(tempButton.equals("usuń"))
         {
-            currentButton.setBackgroundColor(0x00000000);
-
-        }else
-        {
-            currentButton.setBackgroundColor(0xFFFF0000);
-
+            tempButton=" ";
         }
 
+        currentButton.setText(tempButton);
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setStroke(2, Color.BLACK);
+        drawable.setColor(Color.rgb(255, 255, 255));
+        currentButton.setBackgroundDrawable(drawable);
 
-        if(checkAllButtons(mButtons)){
+        if(!checkAllButtons(mButtons) && !CheckAllFullSudokuTab(mButtons)){
             Toast.makeText(Easy.this, "Jeszcze do rozwiazania", Toast.LENGTH_SHORT).show();
 
-        }else
+        }else if(!checkAllButtons(mButtons) && CheckAllFullSudokuTab(mButtons))
         {
             Toast.makeText(Easy.this, "Ukonczona", Toast.LENGTH_SHORT).show();
             //if(checkIfCorrect(mButtons))
@@ -327,6 +396,8 @@ public class Easy extends AppCompatActivity {
 
         }
     }
+
+
 
 
 

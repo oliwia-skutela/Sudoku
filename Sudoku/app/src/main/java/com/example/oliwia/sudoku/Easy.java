@@ -148,33 +148,17 @@ public class Easy extends AppCompatActivity {
 
 
                 b.setBackgroundDrawable(drawable);
-                //b.setOnClickListener(this);
                 if(properSudokuTab[i][j] == null || properSudokuTab[i][j].isEmpty() || properSudokuTab[i][j] == " ") {
-                    // GradientDrawable font = new GradientDrawable();
-                    //font.setColor(Color.rgb(255, 000, 000));
-                    //b.setForeground(font);
                     b.setTextColor(Color.BLUE);
-                //b.setOnClickListener(this);
                     b.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             Button b = (Button) v;
                             currentButton = b;
                             currentX=tempI;
                             currentY=tempJ;
-
                         }
                     });
-                     /*GradientDrawable border = new GradientDrawable();
-                    border.setStroke(1, Color.MAGENTA);
-                    border.setGradientType(GradientDrawable.RECTANGLE);
-
-                    Drawable[] layers = {border};*/
-                    // b.setBackgroundColor(0xff0000ff);
-
-                    //drawable.setGradientType(GradientDrawable.RECTANGLE);
-
                 }
-                //b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tr.addView(b);
             }
 

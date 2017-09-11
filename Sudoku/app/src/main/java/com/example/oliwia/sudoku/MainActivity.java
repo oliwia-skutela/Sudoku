@@ -22,6 +22,8 @@ public class MainActivity extends Activity {
     SudokuDBHelper sdb;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +38,10 @@ public class MainActivity extends Activity {
 
         sdb=new SudokuDBHelper(this);
 
-
-
         btnCreate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
+                Intent cell = new Intent(getApplicationContext(), Create.class);
+                startActivity(cell);// Perform action on click
             }
         });
 
@@ -69,7 +70,7 @@ public class MainActivity extends Activity {
                 Bundle b = new Bundle();
                 b.putInt("key", 45); //Your id
                 cell.putExtras(b);
-                startActivity(cell);//przejscie do poziomu łatwy// Perform action on click
+                startActivity(cell);//przejscie do poziomu sredni// Perform action on click
             }
         });
 
@@ -79,7 +80,7 @@ public class MainActivity extends Activity {
                 Bundle b = new Bundle();
                 b.putInt("key", 60); //Your id
                 cell.putExtras(b);
-                startActivity(cell);//przejscie do poziomu łatwy// Perform action on click
+                startActivity(cell);//przejscie do poziomu trudny// Perform action on click
             }
         });
 

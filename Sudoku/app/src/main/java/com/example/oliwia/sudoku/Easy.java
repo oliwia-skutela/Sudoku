@@ -24,6 +24,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,6 +48,8 @@ public class Easy extends AppCompatActivity {
     Chronometer time;
     SudokuDBHelper db;
     String login ="";
+    int level;
+    String boardLevel="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -328,19 +331,7 @@ public class Easy extends AppCompatActivity {
         }else if(!checkAllButtons(mButtons) && CheckAllFullSudokuTab(mButtons))
         {
             Toast.makeText(Easy.this, "Ukonczona", Toast.LENGTH_SHORT).show();
-            //if(checkIfCorrect(mButtons))
-            //{
-              //  Toast.makeText(Easy.this, "Ukonczone i bez bledow", Toast.LENGTH_SHORT).show();
-
-                time.stop();
-
-                String date = getCurrentDate();
-                BoardHelper bh = new BoardHelper();
-                String originalBoard = bh.convertToString(checkSudokuTab);
-                String currentBoard = bh.convertToString(properSudokuTab);
-                db.addBoard(date,currentBoard,originalBoard );
-
-
+            time.stop();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Czy chcesz zapisać swój wynik?");
 
@@ -355,11 +346,19 @@ public class Easy extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     login = input.getText().toString();
-                    db.addRecord(login,time.getText().toString(),"łatwy ");
-                    Intent cell = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(cell);
+                    switch(level) {
+                        case 30:
+                            boardLevel = "łatwy";
+                            break;
+                        case 45:
+                            boardLevel = "średni";
+                            break;
+                        case 60:
+                            boardLevel = "trudny";
+                            break;
+                    }
 
-
+                    db.addRecord(login,time.getText().toString(),boardLevel);
                 }
             });
             builder.setNegativeButton("Nie zapisuj", new DialogInterface.OnClickListener() {
@@ -373,10 +372,7 @@ public class Easy extends AppCompatActivity {
 
             builder.show();
 
-            //}else
-            //{
-              //  Toast.makeText(Easy.this, "Plansza zawiera błędy", Toast.LENGTH_SHORT).show();
-            //}
+
 
         }
     }
@@ -413,11 +409,69 @@ public class Easy extends AppCompatActivity {
         return isCorrect;
     }
 
+    String saveBoard(List<Button> buttons)
+    {
+        String actuallyBoard="";
+        int i=1;
+        for(Button b:buttons)
+        {
+            if(i==9)
+            {
+                actuallyBoard+=b.getText().toString()+";";
+                i=1;
+            }else
+            {
+                actuallyBoard+=b.getText().toString()+",";
+                i++;
+            }
+
+
+        }
+        return actuallyBoard;
+    }
+
     public String getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat mdformat = new SimpleDateFormat("dd / MM / yyyy ");
         String strDate = mdformat.format(calendar.getTime());
         return strDate;
     }
+    @Override
+    public void onBackPressed() {
+
+        saveBoardToDB();
+
+        super.onBackPressed();
+    }
+
+
+    public void saveBoardToDB()
+    {
+        time.stop();
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = df.format(Calendar.getInstance().getTime());
+        BoardHelper bh = new BoardHelper();
+        String originalBoard = bh.convertToString(checkSudokuTab);
+        String emptyBoard = bh.convertToString(properSudokuTab);
+        String board = saveBoard(mButtons);
+        switch(level) {
+            case 30:
+                boardLevel = "łatwy";
+                break;
+            case 45:
+                boardLevel = "średni";
+                break;
+            case 60:
+                boardLevel = "trudny";
+                break;
+        }
+
+
+
+        db.addBoard(date,emptyBoard,originalBoard, board, time.getText().toString(), boardLevel);
+
+    }
+
 
 }

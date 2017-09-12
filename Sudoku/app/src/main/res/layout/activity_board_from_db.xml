@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Chronometer
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chronometer2" />
+        </TableRow>
+
+        <TableRow>
+            <TableLayout
+                android:id="@+id/tableLayoutSudoku"
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
+
+            </TableLayout>
+
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/buttonRow">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TableRow>
+                    <Button
+                        android:id="@+id/jeden"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="1" />
+                    <Button
+                        android:id="@+id/dwa"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="2" />
+                    <Button
+                        android:id="@+id/trzy"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="3" />
+                    <Button
+                        android:id="@+id/cztery"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="4" />
+                    <Button
+                        android:id="@+id/piec"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="5" />
+                    <Button
+                        android:id="@+id/szesc"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="6" />
+                </TableRow>
+                <TableRow>
+                    <Button
+                        android:id="@+id/siedem"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="7" />
+                    <Button
+                        android:id="@+id/osiem"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="8" />
+                    <Button
+                        android:id="@+id/dziewiec"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="9" />
+                    <Button
+                        android:id="@+id/delete"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="usuń" />
+
+                    <Button
+                        android:id="@+id/check"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="Sprawdź" />
+                </TableRow>
+
+            </TableLayout>
+
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>

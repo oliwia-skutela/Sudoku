@@ -47,7 +47,8 @@ public class MainActivity extends Activity {
 
         btnRestore.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
+                Intent cell = new Intent(getApplicationContext(), RestoreBoard.class);
+                startActivity(cell);//przejscie do rekordow
             }
         });
 

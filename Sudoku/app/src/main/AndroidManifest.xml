@@ -8,23 +8,29 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Instruction"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Score"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".Easy"
-        android:screenOrientation="portrait"/>
-        <activity android:name=".Create"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Instruction"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Score"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Easy"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Create"
+            android:screenOrientation="portrait" />
+        <activity android:name=".RestoreBoard" />
+        <activity android:name=".BoardFromDB"></activity>
     </application>
 
 </manifest>

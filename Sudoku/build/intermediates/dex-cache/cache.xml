@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\user\Desktop\Git_repo\Sudoku2\Sudoku\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.2_56cb9135bf1bd704eeaa78bb7e1de36312cfdd96\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\Desktop\Git_repo\Sudoku2\Sudoku\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="17d65bd16f8e4a12a70496675194b279657eb4cb">
+        <dex dex="C:\Users\user\Desktop\Git_repo\Sudoku2\Sudoku\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_57cc13faf33f0671463a036f617d46fa191df858\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\efb15f146cb6d09a2bb08be7ac6367268470598d\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\user\Desktop\Git_repo\Sudoku2\Sudoku\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e2528d160eff3c570c4e58feca13507b58c7524f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\Desktop\Git_repo\Sudoku2\Sudoku\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+        <dex dex="C:\Users\user\Desktop\Git_repo\Sudoku2\Sudoku\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_5988bc55b9d9c2bd952c5c393a3b7d0a2dbabea6\classes.dex" />
+    </item>
+
+</items>

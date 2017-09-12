@@ -26,8 +26,11 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
     public static final String TableBoards="Boards";
     public static final String Col_0B="_id";
     public static final String Col_1B="Date";
-    public static final String Col_2B="Board";
+    public static final String Col_2B="EmptyBoard";
     public static final String Col_3B="OriginalBoard";
+    public static final String Col_4B="Board";
+    public static final String Col_5B="Time";
+    public static final String Col_6B="Level";
 
 
 
@@ -51,7 +54,10 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TableBoards + " ( " + Col_0B + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 Col_1B + " text, " +
                 Col_2B + " text,"  +
-                Col_3B + " text"+ ")");
+                Col_3B + " text,"  +
+                Col_4B + " text,"  +
+                Col_5B + " text,"  +
+                Col_6B + " text"+ ")");
         Log.d(LOGCAT,"Create table Boards");
     }
 
@@ -77,12 +83,15 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
         Log.d(LOGCAT,"Add to table Records");
     }
 
-    public void addBoard(String date, String board, String originalBoard){
+    public void addBoard(String date, String emptyboard, String originalBoard, String board, String time, String level){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put(Col_1B,date);
-        value.put(Col_2B,board);
+        value.put(Col_2B,emptyboard);
         value.put(Col_3B,originalBoard);
+        value.put(Col_4B, board);
+        value.put(Col_5B, time);
+        value.put(Col_6B,level);
         db.insert(TableBoards, null, value);
         db.close();
         Log.d(LOGCAT,"Add to table Boards");
@@ -101,27 +110,30 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
         db.delete(TableRecords, null, null);
     }
 
-
-    public String getLastBoard(int id)
+    public Cursor getBoard(int id)
     {
-        SQLiteDatabase db=this.getWritableDatabase();
-        String[] columns = {Col_1B,Col_2B};
+        SQLiteDatabase db=this.getReadableDatabase();
+        String[] columns = {Col_2B, Col_3B, Col_4B, Col_5B, Col_6B};
         String where = Col_0B + "=" + id;
         Cursor cursor = db.query(TableBoards, columns, where, null, null, null, null);
-        String board="";
 
-        if(cursor != null && cursor.moveToFirst()) {
-            board = cursor.getString(2);
-        }
-        return board;
+        return cursor;
     }
 
     public Cursor getAllBoards(){
-        String[] columns = {Col_0B,Col_1B,Col_2B};
+        String[] columns = {Col_0B,Col_1B};
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TableRecords, columns, null, null, null, null, null);
+        Cursor cursor = db.query(TableBoards, columns, null, null, null, null, null);
         return cursor;
     }
+
+    public void removeBoard(String id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TableBoards, Col_0B + "=" + id, null);
+        db.close();
+    }
+
 
     public boolean doesDatabaseExist(Context context) {
         File dbFile = context.getDatabasePath(DBName);

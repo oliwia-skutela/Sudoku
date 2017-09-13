@@ -24,7 +24,7 @@
             android:name=".Score"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Easy"
+            android:name=".Levels"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Create"

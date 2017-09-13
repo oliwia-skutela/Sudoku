@@ -1,5 +1,8 @@
 package com.example.oliwia.sudoku;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.GradientDrawable;
@@ -9,12 +12,16 @@ import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -28,13 +35,16 @@ public class Create extends AppCompatActivity {
     List<Button> mButtons = new ArrayList();
     int currentX;
     int currentY;
-    final String [][] properSudokuTab = new String[9][9];
+   final String [][] properSudokuTab = new String[9][9];
+    SudokuDBHelper db;
+    String login ="";
     Chronometer time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
+        db=new SudokuDBHelper(this);
 
 
         Display display = getWindowManager().getDefaultDisplay();
@@ -70,12 +80,7 @@ public class Create extends AppCompatActivity {
 
 
                 b.setBackgroundDrawable(drawable);
-                //b.setOnClickListener(this);
-                    // GradientDrawable font = new GradientDrawable();
-                    //font.setColor(Color.rgb(255, 000, 000));
-                    //b.setForeground(font);
                     b.setTextColor(Color.BLUE);
-                    //b.setOnClickListener(this);
                     b.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             Button b = (Button) v;
@@ -193,6 +198,38 @@ public class Create extends AppCompatActivity {
                 if(CheckSolution(mButtons)) {
                     Toast.makeText(Create.this, "Gratulacje", Toast.LENGTH_SHORT).show();
                     time.stop();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                    builder.setTitle("Czy chcesz zapisać swój wynik?");
+
+
+                    final EditText input = new EditText(getApplicationContext());
+
+                    input.setText("Podaj login");
+                    builder.setView(input);
+
+
+                    builder.setPositiveButton("Zapisz", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            login = input.getText().toString();
+
+                            db.addRecord(login,time.getText().toString(), "własny");
+                            Intent cell = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(cell);
+                        }
+                    });
+                    builder.setNegativeButton("Nie zapisuj", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            Intent cell = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(cell);
+                        }
+                    });
+
+                    builder.show();
+
+
                 }
                 else
                 {
@@ -213,7 +250,6 @@ public class Create extends AppCompatActivity {
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
                 if(buttons.get(counter).getText().toString().equals(" ")){
-                    //arr[i][j]=0;
                     return false;
                 }
                 else {

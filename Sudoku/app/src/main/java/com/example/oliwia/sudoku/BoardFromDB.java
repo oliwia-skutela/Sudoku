@@ -37,7 +37,7 @@ public class BoardFromDB extends AppCompatActivity {
     SudokuDBHelper db;
     String login="";
     String previousTime="";
-    String level="";
+    String level;
     String emptyBoardstr="";
 
     @Override
@@ -126,17 +126,9 @@ public class BoardFromDB extends AppCompatActivity {
 
                         }
                     });
-                     /*GradientDrawable border = new GradientDrawable();
-                    border.setStroke(1, Color.MAGENTA);
-                    border.setGradientType(GradientDrawable.RECTANGLE);
 
-                    Drawable[] layers = {border};*/
-                    // b.setBackgroundColor(0xff0000ff);
-
-                    //drawable.setGradientType(GradientDrawable.RECTANGLE);
 
                 }
-                //b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tr.addView(b);
             }
 
@@ -269,11 +261,11 @@ public class BoardFromDB extends AppCompatActivity {
         currentButton.setBackgroundDrawable(drawable);
 
         if(!checkAllButtons(mButtons) && !CheckAllFullSudokuTab(mButtons)){
-            Toast.makeText(BoardFromDB.this, "Jeszcze do rozwiazania", Toast.LENGTH_SHORT).show();
+            Toast.makeText(BoardFromDB.this, "Próbuj dalej", Toast.LENGTH_SHORT).show();
 
         }else if(!checkAllButtons(mButtons) && CheckAllFullSudokuTab(mButtons))
         {
-            Toast.makeText(BoardFromDB.this, "Ukonczona", Toast.LENGTH_SHORT).show();
+            Toast.makeText(BoardFromDB.this, "Gratulacje", Toast.LENGTH_SHORT).show();
             time.stop();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Czy chcesz zapisać swój wynik?");
@@ -289,7 +281,6 @@ public class BoardFromDB extends AppCompatActivity {
             builder.setPositiveButton("Zapisz", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(BoardFromDB.this, "jestem w zapisz", Toast.LENGTH_LONG).show();
                     login = input.getText().toString();
                     String [] t1=previousTime.split(":");
                     String actuallyTime=time.getText().toString();
@@ -356,7 +347,7 @@ public class BoardFromDB extends AppCompatActivity {
         for(int i = 0; i<9; i++)
         {
             for (int j=0; j<9; j++){
-                if(!checkSudokuTab[i][j].equals(ButtonList.get(counter).getText().toString()))//|| ButtonList.get(counter).getText().toString().equals(" "))
+                if(!checkSudokuTab[i][j].equals(ButtonList.get(counter).getText().toString()))
                 {
                     return false;
                 }
@@ -381,19 +372,7 @@ public class BoardFromDB extends AppCompatActivity {
         return isEmpty;
     }
 
-    boolean checkIfCorrect(List<Button> buttons)
-    {
-        boolean isCorrect=true;
-        for(Button b:buttons){
-            if(b.getTextColors().getDefaultColor()==0xFFFF0000)
-            {
-                isCorrect=false;
-                break;
-            }
 
-        }
-        return isCorrect;
-    }
     String saveBoard(List<Button> buttons)
     {
         String actuallyBoard="";
@@ -415,12 +394,6 @@ public class BoardFromDB extends AppCompatActivity {
         return actuallyBoard;
     }
 
-    public String getCurrentDate() {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat mdformat = new SimpleDateFormat("dd / MM / yyyy ");
-        String strDate = mdformat.format(calendar.getTime());
-        return strDate;
-    }
 
     @Override
     public void onBackPressed() {

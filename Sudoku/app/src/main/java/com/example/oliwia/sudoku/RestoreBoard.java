@@ -32,20 +32,18 @@ ListView lv;
             @Override
             public void onItemClick(AdapterView<?> listView, View view,
                                     int position, long id) {
-                // Get the cursor, positioned to the corresponding row in the result set
+
                 Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
-                // Get the state's capital from this row in the database.
-                final String countryCode =
+
+                final String code =
                         cursor.getString(cursor.getColumnIndexOrThrow("_id"));
 
-                // Get the state's capital from this row in the database.
-                int getid = Integer.parseInt(countryCode);
+                int getid = Integer.parseInt(code);
 
-                Toast.makeText(RestoreBoard.this, String.valueOf(getid), Toast.LENGTH_SHORT).show();
                 Intent cell = new Intent(getApplicationContext(), BoardFromDB.class);
                 Bundle b = new Bundle();
-                b.putInt("id", getid); //Your id
+                b.putInt("id", getid);
                 cell.putExtras(b);
                 startActivity(cell);
             }

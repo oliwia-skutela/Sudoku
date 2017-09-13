@@ -104,12 +104,6 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void removeRecords()
-    {
-        SQLiteDatabase db=this.getWritableDatabase();
-        db.delete(TableRecords, null, null);
-    }
-
     public Cursor getBoard(int id)
     {
         SQLiteDatabase db=this.getReadableDatabase();
@@ -132,12 +126,6 @@ public class SudokuDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TableBoards, Col_0B + "=" + id, null);
         db.close();
-    }
-
-
-    public boolean doesDatabaseExist(Context context) {
-        File dbFile = context.getDatabasePath(DBName);
-        return dbFile.exists();
     }
 
 }

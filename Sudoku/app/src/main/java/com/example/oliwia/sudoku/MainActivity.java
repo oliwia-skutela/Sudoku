@@ -2,14 +2,10 @@ package com.example.oliwia.sudoku;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Point;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
 
 public class MainActivity extends Activity {
     Button btnCreate;
@@ -41,47 +37,46 @@ public class MainActivity extends Activity {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent cell = new Intent(getApplicationContext(), Create.class);
-                startActivity(cell);// Perform action on click
+                startActivity(cell);
             }
         });
 
         btnRestore.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent cell = new Intent(getApplicationContext(), RestoreBoard.class);
-                startActivity(cell);//przejscie do rekordow
+                startActivity(cell);
             }
         });
 
         btnEasy.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent cell = new Intent(getApplicationContext(), Easy.class);
+                Intent cell = new Intent(getApplicationContext(), Levels.class);
                 Bundle b = new Bundle();
-                b.putInt("key", 30); //Your id
+                b.putInt("key", 30);
                 cell.putExtras(b);
-                startActivity(cell);//przejscie do poziomu łatwy
-                // Perform action on click
+                startActivity(cell);
             }
         });
 
         btnMedium.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent cell = new Intent(getApplicationContext(), Easy.class);
+                Intent cell = new Intent(getApplicationContext(), Levels.class);
                 Bundle b = new Bundle();
-                b.putInt("key", 45); //Your id
+                b.putInt("key", 45);
                 cell.putExtras(b);
-                startActivity(cell);//przejscie do poziomu sredni// Perform action on click
+                startActivity(cell);
             }
         });
 
         btnHard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent cell = new Intent(getApplicationContext(), Easy.class);
+                Intent cell = new Intent(getApplicationContext(), Levels.class);
                 Bundle b = new Bundle();
-                b.putInt("key", 60); //Your id
+                b.putInt("key", 60);
                 cell.putExtras(b);
-                startActivity(cell);//przejscie do poziomu trudny// Perform action on click
+                startActivity(cell);
             }
         });
 
@@ -89,14 +84,14 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 Intent cell = new Intent(getApplicationContext(), Score.class);
-                startActivity(cell);//przejscie do rekordow
+                startActivity(cell);
             }
         });
 
         btnInstruction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent cell = new Intent(getApplicationContext(), Instruction.class);
-                startActivity(cell);//przejscie do instrukcji
+                startActivity(cell);
             }
         });
     }
